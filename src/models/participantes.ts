@@ -119,7 +119,7 @@ export type participante = {
     _nomCaballo: String | null,
     _raza: String | null,
     _edadCaballo: String | null,
-    _cabEstabullado: Boolean | null
+    _cabEstabulado: Boolean | null
 }
 
 export type pSalto = {
@@ -131,7 +131,7 @@ export type pSalto = {
     _nomCaballo: String | null,
     _raza: String | null,
     _edadCaballo: String | null,
-    _cabEstabullado: Boolean | null,
+    _cabEstabulado: Boolean | null,
     _totalSaltos: Number | null,
     _maxAltura: Number | null,
     _TLimiteS: Number | null,
@@ -152,7 +152,7 @@ export type pCross = {
     _nomCaballo: String | null,
     _raza: String | null,
     _edadCaballo: String | null,
-    _cabEstabullado: Boolean | null,
+    _cabEstabulado: Boolean | null,
     _TLimiteC: Number | null,
     _cPenalizaciones: {
         _rehusoC: Number | null,
@@ -170,7 +170,7 @@ export type pDoma = {
     _nomCaballo: String | null,
     _raza: String | null,
     _edadCaballo: String | null,
-    _cabEstabullado: Boolean | null,
+    _cabEstabulado: Boolean | null,
     _dPuntuaciones: {
         _parada: Number | null,
         _paso: Number | null,

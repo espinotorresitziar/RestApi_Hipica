@@ -140,7 +140,7 @@ class DatoRoutes {
                 _nomCaballo: participante._nomCaballo,
                 _raza: participante._raza,
                 _edadCaballo: participante._edadCaballo,
-                _cabEstabullado: participante._cabEstabulado,
+                _cabEstabulado: participante._cabEstabulado,
                 _totalSaltos: participante._totalSaltos,
                 _maxAltura: participante._maxAltura,
                 _sPenalizaciones: {
