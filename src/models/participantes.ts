@@ -2,6 +2,10 @@ import { Schema, model } from "mongoose";
 
 const participanteSchema = new Schema (
     {
+        _id: {
+            type: Number,
+            unique: true
+        },
         _nombre: {
             type: String
         },
@@ -107,6 +111,7 @@ const participanteSchema = new Schema (
 )
 
 export type participante = {
+    _id: Number | null,
     _nombre: String | null,
     _fechnac: Date | null,
     _nacionalidad: String | null,
@@ -118,6 +123,7 @@ export type participante = {
 }
 
 export type pSalto = {
+    _id: Number | null,
     _nombre: String | null,
     _fechnac: Date | null,
     _nacionalidad: String | null,
@@ -138,6 +144,7 @@ export type pSalto = {
 }
 
 export type pCross = {
+    _id: Number | null,
     _nombre: String | null,
     _fechnac: Date | null,
     _nacionalidad: String | null,
@@ -155,6 +162,7 @@ export type pCross = {
 }
 
 export type pDoma = {
+    _id: Number | null,
     _nombre: String | null,
     _fechnac: Date | null,
     _nacionalidad: String | null,
