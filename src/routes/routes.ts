@@ -128,6 +128,22 @@ class DatoRoutes {
         await db.desconectarBD()
     }
 
+    private modiNivel = async (req: Request, res: Response) => {
+        const nivel = new Niveles (req.body)
+        await db.conectarBD()
+        await Niveles.findOneAndUpdate(
+           {
+                _tipoNivel: nivel._tipoNivel
+           },
+           {
+               _aficionado: nivel._aficionado,
+               _edadMax: nivel._edadMax,
+               _limiteEdad: nivel._limiteEdad,
+               _inscripcion: nivel._inscripcion
+           }
+        )
+    }
+
     private modiPartici = async (req: Request, res: Response) => {
         const participante = new Participantes (req.body)
         await db.conectarBD()
@@ -144,10 +160,10 @@ class DatoRoutes {
                 _totalSaltos: participante._totalSaltos,
                 _maxAltura: participante._maxAltura,
                 _sPenalizaciones: {
-                    _derriboS: participante.derriboS,
-                    _rehusoS: participante.rehusoS,
-                    _caidaS: participante.caidaS,
-                    _tiempoS: participante.tiempoS
+                    _derriboS: participante._derriboS,
+                    _rehusoS: participante._rehusoS,
+                    _caidaS: participante._caidaS,
+                    _tiempoS: participante._tiempoS
                 },
                 _cPenalizaciones: {
                     _rehusoC: participante._rehusoC,
@@ -197,6 +213,7 @@ class DatoRoutes {
         this._router.get('/participante/:nombre', this.getParticipante)
         this._router.post('/nivel', this.newNivel)
         this._router.post('/participante', this.newParticipante)
+        this._router.put('/modificarNivel/:tipoNivel', this.modiNivel)
         this._router.put('/modificarPartici/:nombre', this.modiPartici)
         this._router.delete('/eliminarPartici/:nombre', this.elimParticipante)
     }

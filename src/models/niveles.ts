@@ -12,7 +12,14 @@ const nivelSchema = new Schema (
         _aficionado: {
             type: Boolean
         },
-        inscripcion: {
+        _edadMax: {
+            type: Number
+        },
+        _limiteEdad: {
+            type: Boolean,
+            default: "False"
+        },
+        _inscripcion: {
             type: Number
         }
     }
@@ -29,6 +36,7 @@ export type nInfantil = {
     _id: number | null,
     _tipoNivel: String | null,
     _aficionado: Boolean | null,
+    _edadMax: number | null,
     _inscripcion: number | null 
 } 
 
@@ -36,6 +44,7 @@ export type nAdulto = {
     _id: number | null,
     _tipoNivel: String | null,
     _aficionado: Boolean | null,
+    _limiteEdad: Boolean | null,
     _inscripcion: number | null 
 } 
 
