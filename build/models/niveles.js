@@ -13,7 +13,13 @@ const nivelSchema = new mongoose_1.Schema({
     _aficionado: {
         type: Boolean
     },
-    inscripcion: {
+    _edadMax: {
+        type: Number
+    },
+    _limiteEdad: {
+        type: Boolean
+    },
+    _inscripcion: {
         type: Number
     }
 });

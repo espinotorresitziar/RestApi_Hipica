@@ -99,89 +99,130 @@ class DatoRoutes {
     }
 
     private newNivel = async (req: Request, res: Response) => {
-        const equi = new Niveles(req.body)
+        const {id, tipoNivel, aficionado, edadMax, limiteEdad, inscripcion} = req.body
         await db.conectarBD()
-            .then(async (mensaje) => {
-                console.log(mensaje)
-                await equi.save()
-                    .then ((doc: any) => res.send('Nivel salvado: ' + doc))
-                    .catch((err: any) => res.send(err))
-            })
-            .catch((mensaje) => {
-                res.send(mensaje)
-            })
+        let dSchema = {
+            "_id": id,
+            "_tipoNivel": tipoNivel,
+            "_aficionado": aficionado,
+            "_edadMax": edadMax,
+            "_limiteEdad": limiteEdad,
+            "_inscripcion": inscripcion
+        }
+        const oSchema = new Niveles(dSchema)
+        await oSchema.save()
+            .then((doc: any) => res.send('Nivel salvado: ' + doc))
+            .catch((err: any) => res.send(err))
         await db.desconectarBD()
     }
 
     private newParticipante = async (req: Request, res: Response) => {
-        const jug = new Participantes(req.body)
+        const {id, nombre, fechNac, nivel, nacionalidad, nomCaballo, raza, edadCaballo,
+        cabEstabulado, totalSaltos, maxAltura, TLimiteS, derriboS, rehusoS, caidaS,
+        tiempoS, TLimiteC, rehusoC, caidaC, tiempoC, parada, paso, trote, galope, 
+        pasoAtras, transiciones, cambioDirec, figuras, movLateral, piruetas} = req.body
         await db.conectarBD()
-            .then(async (mensaje) => {
-                console.log(mensaje)
-                await jug.save()
+        let dSchema = {
+            "_id": id,
+            "_nombre": nombre,
+            "_fechNac": fechNac,
+            "_nivel": nivel,
+            "_nacionalidad": nacionalidad,
+            "_nomCaballo": nomCaballo,
+            "_raza": raza,
+            "_edadCaballo": edadCaballo,
+            "_cabEstabulado": cabEstabulado,
+            "_totalSaltos": totalSaltos,
+            "_maxAltura": maxAltura,
+            "_TLimiteS": TLimiteS,
+            "_derriboS": derriboS,
+            "_rehusoS": rehusoS,
+            "_caidaS": caidaS,
+            "_tiempoS": tiempoS,
+            "_TLimiteC": TLimiteC,
+            "_rehusoC": rehusoC,
+            "_caidaC": caidaC,
+            "_tiempoC": tiempoC,
+            "_parada": parada,
+            "_paso": paso,
+            "_trote": trote,
+            "_galope": galope,
+            "_pasoAtras": pasoAtras,
+            "_transiciones": transiciones,
+            "_cambioDirec": cambioDirec,
+            "_figuras": figuras,
+            "_movLateral": movLateral,
+            "_piruetas": piruetas
+        }
+        const oSchema = new Participantes(dSchema)
+        await oSchema.save()
                     .then((doc: any) => res.send('Participante inscrito: ' + doc))
                     .catch((err: any) => res.send(err))
-            })
-            .catch((mensaje) => {
-                res.send(mensaje)
-            })
         await db.desconectarBD()
     }
 
     private modiNivel = async (req: Request, res: Response) => {
-        const nivel = new Niveles (req.body)
+        const { id } = req.params 
+        const { aficionado, edadMax, limiteEdad, inscripcion } = req.body
         await db.conectarBD()
         await Niveles.findOneAndUpdate(
            {
-                _tipoNivel: nivel._tipoNivel
+                "_id": id
            },
            {
-               _aficionado: nivel._aficionado,
-               _edadMax: nivel._edadMax,
-               _limiteEdad: nivel._limiteEdad,
-               _inscripcion: nivel._inscripcion
+               "_aficionado": aficionado,
+               "_edadMax": edadMax,
+               "_limiteEdad": limiteEdad,
+               "_inscripcion": inscripcion
+           },
+           {
+               new: true,
+               runValidators: true
            }
-        )
+       )
+       .then((doc: any) => res.send('Nivel modificado: ' + doc))
+       .catch((err: any) => res.send('Error: ' + err))
+       await db.desconectarBD()
     }
 
     private modiPartici = async (req: Request, res: Response) => {
-        const participante = new Participantes (req.body)
+        const { nombre } = req.params
+        const {nivel, nomCaballo, raza, edadCaballo, cabEstabulado, totalSaltos, maxAltura, 
+            TLimiteS, derriboS, rehusoS, caidaS, tiempoS, TLimiteC, rehusoC, caidaC, 
+            tiempoC, parada, paso, trote, galope, pasoAtras, transiciones, cambioDirec, 
+            figuras, movLateral, piruetas} = req.body
         await db.conectarBD()
         await Participantes.findOneAndUpdate(
             {
-                _nombre: participante._nombre
+                "_nombre": nombre
             },
             {
-                _nivel: participante._nivel,
-                _nomCaballo: participante._nomCaballo,
-                _raza: participante._raza,
-                _edadCaballo: participante._edadCaballo,
-                _cabEstabulado: participante._cabEstabulado,
-                _totalSaltos: participante._totalSaltos,
-                _maxAltura: participante._maxAltura,
-                _sPenalizaciones: {
-                    _derriboS: participante._derriboS,
-                    _rehusoS: participante._rehusoS,
-                    _caidaS: participante._caidaS,
-                    _tiempoS: participante._tiempoS
-                },
-                _cPenalizaciones: {
-                    _rehusoC: participante._rehusoC,
-                    _caidaC: participante._caidaC,
-                    _tiempoC: participante._tiempoC
-                },
-                _dPuntuaciones: {
-                    _parada: participante._parada,
-                    _paso: participante._paso,
-                    _trote: participante._trote,
-                    _galope: participante._galope,
-                    _pasoAtras: participante._pasoAtras,
-                    _transiciones: participante._transiciones,
-                    _cambioDirec: participante._cambioDirec,
-                    _figuras: participante._figuras,
-                    _movLateral: participante._movLateral,
-                    _piruetas: participante._piruetas
-                }
+                "_nivel": nivel,
+                "_nomCaballo": nomCaballo,
+                "_raza": raza,
+                "_edadCaballo": edadCaballo,
+                "_cabEstabulado": cabEstabulado,
+                "_totalSaltos": totalSaltos,
+                "_maxAltura": maxAltura,
+                "_TLimiteS": TLimiteS,
+                "_derriboS": derriboS,
+                "_rehusoS": rehusoS,
+                "_caidaS": caidaS,
+                "_tiempoS": tiempoS,
+                "_TLimiteC": TLimiteC,
+                "_rehusoC": rehusoC,
+                "_caidaC": caidaC,
+                "_tiempoC": tiempoC,
+                "_parada": parada,
+                "_paso": paso,
+                "_trote": trote,
+                "_galope": galope,
+                "_pasoAtras": pasoAtras,
+                "_transiciones": transiciones,
+                "_cambioDirec": cambioDirec,
+                "_figuras": figuras,
+                "_movLateral": movLateral,
+                "_piruetas": piruetas
             },
             {
                 new: true,
@@ -213,7 +254,7 @@ class DatoRoutes {
         this._router.get('/participante/:nombre', this.getParticipante)
         this._router.post('/nivel', this.newNivel)
         this._router.post('/participante', this.newParticipante)
-        this._router.put('/modificarNivel/:tipoNivel', this.modiNivel)
+        this._router.put('/modificarNivel/:id', this.modiNivel)
         this._router.put('/modificarPartici/:nombre', this.modiPartici)
         this._router.delete('/eliminarPartici/:nombre', this.elimParticipante)
     }

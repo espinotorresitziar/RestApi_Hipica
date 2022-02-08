@@ -90,69 +90,115 @@ class DatoRoutes {
             yield database_1.db.desconectarBD();
         });
         this.newNivel = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const equi = new niveles_1.Niveles(req.body);
-            yield database_1.db.conectarBD()
-                .then((mensaje) => __awaiter(this, void 0, void 0, function* () {
-                console.log(mensaje);
-                yield equi.save()
-                    .then((doc) => res.send('Nivel salvado: ' + doc))
-                    .catch((err) => res.send(err));
-            }))
-                .catch((mensaje) => {
-                res.send(mensaje);
-            });
+            const { id, tipoNivel, aficionado, edadMax, limiteEdad, inscripcion } = req.body;
+            yield database_1.db.conectarBD();
+            let dSchema = {
+                "_id": id,
+                "_tipoNivel": tipoNivel,
+                "_aficionado": aficionado,
+                "_edadMax": edadMax,
+                "_limiteEdad": limiteEdad,
+                "_inscripcion": inscripcion
+            };
+            const oSchema = new niveles_1.Niveles(dSchema);
+            yield oSchema.save()
+                .then((doc) => res.send('Nivel salvado: ' + doc))
+                .catch((err) => res.send(err));
             yield database_1.db.desconectarBD();
         });
         this.newParticipante = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const jug = new participantes_1.Participantes(req.body);
-            yield database_1.db.conectarBD()
-                .then((mensaje) => __awaiter(this, void 0, void 0, function* () {
-                console.log(mensaje);
-                yield jug.save()
-                    .then((doc) => res.send('Participante inscrito: ' + doc))
-                    .catch((err) => res.send(err));
-            }))
-                .catch((mensaje) => {
-                res.send(mensaje);
-            });
+            const { id, nombre, fechNac, nivel, nacionalidad, nomCaballo, raza, edadCaballo, cabEstabulado, totalSaltos, maxAltura, TLimiteS, derriboS, rehusoS, caidaS, tiempoS, TLimiteC, rehusoC, caidaC, tiempoC, parada, paso, trote, galope, pasoAtras, transiciones, cambioDirec, figuras, movLateral, piruetas } = req.body;
+            yield database_1.db.conectarBD();
+            let dSchema = {
+                "_id": id,
+                "_nombre": nombre,
+                "_fechNac": fechNac,
+                "_nivel": nivel,
+                "_nacionalidad": nacionalidad,
+                "_nomCaballo": nomCaballo,
+                "_raza": raza,
+                "_edadCaballo": edadCaballo,
+                "_cabEstabulado": cabEstabulado,
+                "_totalSaltos": totalSaltos,
+                "_maxAltura": maxAltura,
+                "_TLimiteS": TLimiteS,
+                "_derriboS": derriboS,
+                "_rehusoS": rehusoS,
+                "_caidaS": caidaS,
+                "_tiempoS": tiempoS,
+                "_TLimiteC": TLimiteC,
+                "_rehusoC": rehusoC,
+                "_caidaC": caidaC,
+                "_tiempoC": tiempoC,
+                "_parada": parada,
+                "_paso": paso,
+                "_trote": trote,
+                "_galope": galope,
+                "_pasoAtras": pasoAtras,
+                "_transiciones": transiciones,
+                "_cambioDirec": cambioDirec,
+                "_figuras": figuras,
+                "_movLateral": movLateral,
+                "_piruetas": piruetas
+            };
+            const oSchema = new participantes_1.Participantes(dSchema);
+            yield oSchema.save()
+                .then((doc) => res.send('Participante inscrito: ' + doc))
+                .catch((err) => res.send(err));
+            yield database_1.db.desconectarBD();
+        });
+        this.modiNivel = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const { aficionado, edadMax, limiteEdad, inscripcion } = req.body;
+            yield database_1.db.conectarBD();
+            yield niveles_1.Niveles.findOneAndUpdate({
+                "_id": id
+            }, {
+                "_aficionado": aficionado,
+                "_edadMax": edadMax,
+                "_limiteEdad": limiteEdad,
+                "_inscripcion": inscripcion
+            }, {
+                new: true,
+                runValidators: true
+            })
+                .then((doc) => res.send('Nivel modificado: ' + doc))
+                .catch((err) => res.send('Error: ' + err));
             yield database_1.db.desconectarBD();
         });
         this.modiPartici = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const participante = new participantes_1.Participantes(req.body);
+            const { nombre } = req.params;
+            const { nivel, nomCaballo, raza, edadCaballo, cabEstabulado, totalSaltos, maxAltura, TLimiteS, derriboS, rehusoS, caidaS, tiempoS, TLimiteC, rehusoC, caidaC, tiempoC, parada, paso, trote, galope, pasoAtras, transiciones, cambioDirec, figuras, movLateral, piruetas } = req.body;
             yield database_1.db.conectarBD();
             yield participantes_1.Participantes.findOneAndUpdate({
-                _nombre: participante._nombre
+                "_nombre": nombre
             }, {
-                _nivel: participante._nivel,
-                _nomCaballo: participante._nomCaballo,
-                _raza: participante._raza,
-                _edadCaballo: participante._edadCaballo,
-                _cabEstabullado: participante._cabEstabulado,
-                _totalSaltos: participante._totalSaltos,
-                _maxAltura: participante._maxAltura,
-                _sPenalizaciones: {
-                    _derriboS: participante.derriboS,
-                    _rehusoS: participante.rehusoS,
-                    _caidaS: participante.caidaS,
-                    _tiempoS: participante.tiempoS
-                },
-                _cPenalizaciones: {
-                    _rehusoC: participante._rehusoC,
-                    _caidaC: participante._caidaC,
-                    _tiempoC: participante._tiempoC
-                },
-                _dPuntuaciones: {
-                    _parada: participante._parada,
-                    _paso: participante._paso,
-                    _trote: participante._trote,
-                    _galope: participante._galope,
-                    _pasoAtras: participante._pasoAtras,
-                    _transiciones: participante._transiciones,
-                    _cambioDirec: participante._cambioDirec,
-                    _figuras: participante._figuras,
-                    _movLateral: participante._movLateral,
-                    _piruetas: participante._piruetas
-                }
+                "_nivel": nivel,
+                "_nomCaballo": nomCaballo,
+                "_raza": raza,
+                "_edadCaballo": edadCaballo,
+                "_cabEstabulado": cabEstabulado,
+                "_totalSaltos": totalSaltos,
+                "_maxAltura": maxAltura,
+                "_TLimiteS": TLimiteS,
+                "_derriboS": derriboS,
+                "_rehusoS": rehusoS,
+                "_caidaS": caidaS,
+                "_tiempoS": tiempoS,
+                "_TLimiteC": TLimiteC,
+                "_rehusoC": rehusoC,
+                "_caidaC": caidaC,
+                "_tiempoC": tiempoC,
+                "_parada": parada,
+                "_paso": paso,
+                "_trote": trote,
+                "_galope": galope,
+                "_pasoAtras": pasoAtras,
+                "_transiciones": transiciones,
+                "_cambioDirec": cambioDirec,
+                "_figuras": figuras,
+                "_movLateral": movLateral,
+                "_piruetas": piruetas
             }, {
                 new: true,
                 runValidators: true
@@ -183,6 +229,7 @@ class DatoRoutes {
         this._router.get('/participante/:nombre', this.getParticipante);
         this._router.post('/nivel', this.newNivel);
         this._router.post('/participante', this.newParticipante);
+        this._router.put('/modificarNivel/:id', this.modiNivel);
         this._router.put('/modificarPartici/:nombre', this.modiPartici);
         this._router.delete('/eliminarPartici/:nombre', this.elimParticipante);
     }

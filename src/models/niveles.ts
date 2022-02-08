@@ -16,8 +16,7 @@ const nivelSchema = new Schema (
             type: Number
         },
         _limiteEdad: {
-            type: Boolean,
-            default: "False"
+            type: Boolean
         },
         _inscripcion: {
             type: Number
