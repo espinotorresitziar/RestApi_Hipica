@@ -10,8 +10,8 @@ const participanteSchema = new mongoose_1.Schema({
     _nombre: {
         type: String
     },
-    _fechNac: {
-        type: Date
+    _edad: {
+        type: Number
     },
     _nivel: {
         type: String

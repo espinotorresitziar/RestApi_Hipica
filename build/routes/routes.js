@@ -90,13 +90,12 @@ class DatoRoutes {
             yield database_1.db.desconectarBD();
         });
         this.newNivel = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { id, tipoNivel, aficionado, edadMax, limiteEdad, inscripcion } = req.body;
+            const { id, tipoNivel, aficionado, limiteEdad, inscripcion } = req.body;
             yield database_1.db.conectarBD();
             let dSchema = {
                 "_id": id,
                 "_tipoNivel": tipoNivel,
                 "_aficionado": aficionado,
-                "_edadMax": edadMax,
                 "_limiteEdad": limiteEdad,
                 "_inscripcion": inscripcion
             };
@@ -107,12 +106,12 @@ class DatoRoutes {
             yield database_1.db.desconectarBD();
         });
         this.newParticipante = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { id, nombre, fechNac, nivel, nacionalidad, nomCaballo, raza, edadCaballo, cabEstabulado, totalSaltos, maxAltura, TLimiteS, derriboS, rehusoS, caidaS, tiempoS, TLimiteC, rehusoC, caidaC, tiempoC, parada, paso, trote, galope, pasoAtras, transiciones, cambioDirec, figuras, movLateral, piruetas } = req.body;
+            const { id, nombre, edad, nivel, nacionalidad, nomCaballo, raza, edadCaballo, cabEstabulado, totalSaltos, maxAltura, TLimiteS, derriboS, rehusoS, caidaS, tiempoS, TLimiteC, rehusoC, caidaC, tiempoC, parada, paso, trote, galope, pasoAtras, transiciones, cambioDirec, figuras, movLateral, piruetas } = req.body;
             yield database_1.db.conectarBD();
             let dSchema = {
                 "_id": id,
                 "_nombre": nombre,
-                "_fechNac": fechNac,
+                "_edad": edad,
                 "_nivel": nivel,
                 "_nacionalidad": nacionalidad,
                 "_nomCaballo": nomCaballo,
@@ -149,13 +148,12 @@ class DatoRoutes {
         });
         this.modiNivel = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const { aficionado, edadMax, limiteEdad, inscripcion } = req.body;
+            const { aficionado, limiteEdad, inscripcion } = req.body;
             yield database_1.db.conectarBD();
             yield niveles_1.Niveles.findOneAndUpdate({
                 "_id": id
             }, {
                 "_aficionado": aficionado,
-                "_edadMax": edadMax,
                 "_limiteEdad": limiteEdad,
                 "_inscripcion": inscripcion
             }, {
