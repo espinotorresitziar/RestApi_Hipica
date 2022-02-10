@@ -9,8 +9,8 @@ const participanteSchema = new Schema (
         _nombre: {
             type: String
         },
-        _fechNac: {
-            type: Date
+        _edad: {
+            type: Number
         },
         _nivel: {
             type: String
@@ -113,7 +113,7 @@ const participanteSchema = new Schema (
 export type participante = {
     _id: Number | null,
     _nombre: String | null,
-    _fechnac: Date | null,
+    _edad: Number | null,
     _nacionalidad: String | null,
     _nivel: String | null,
     _nomCaballo: String | null,
@@ -125,7 +125,7 @@ export type participante = {
 export type pSalto = {
     _id: Number | null,
     _nombre: String | null,
-    _fechnac: Date | null,
+    _edad: Number | null,
     _nacionalidad: String | null,
     _nivel: String | null,
     _nomCaballo: String | null,
@@ -146,7 +146,7 @@ export type pSalto = {
 export type pCross = {
     _id: Number | null,
     _nombre: String | null,
-    _fechnac: Date | null,
+    _edad: Number | null,
     _nacionalidad: String | null,
     _nivel: String | null,
     _nomCaballo: String | null,
@@ -164,7 +164,7 @@ export type pCross = {
 export type pDoma = {
     _id: Number | null,
     _nombre: String | null,
-    _fechnac: Date | null,
+    _edad: Number | null,
     _nacionalidad: String | null,
     _nivel: String | null,
     _nomCaballo: String | null,

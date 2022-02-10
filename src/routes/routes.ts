@@ -99,13 +99,12 @@ class DatoRoutes {
     }
 
     private newNivel = async (req: Request, res: Response) => {
-        const {id, tipoNivel, aficionado, edadMax, limiteEdad, inscripcion} = req.body
+        const {id, tipoNivel, aficionado, limiteEdad, inscripcion} = req.body
         await db.conectarBD()
         let dSchema = {
             "_id": id,
             "_tipoNivel": tipoNivel,
             "_aficionado": aficionado,
-            "_edadMax": edadMax,
             "_limiteEdad": limiteEdad,
             "_inscripcion": inscripcion
         }
@@ -117,7 +116,7 @@ class DatoRoutes {
     }
 
     private newParticipante = async (req: Request, res: Response) => {
-        const {id, nombre, fechNac, nivel, nacionalidad, nomCaballo, raza, edadCaballo,
+        const {id, nombre, edad, nivel, nacionalidad, nomCaballo, raza, edadCaballo,
         cabEstabulado, totalSaltos, maxAltura, TLimiteS, derriboS, rehusoS, caidaS,
         tiempoS, TLimiteC, rehusoC, caidaC, tiempoC, parada, paso, trote, galope, 
         pasoAtras, transiciones, cambioDirec, figuras, movLateral, piruetas} = req.body
@@ -125,7 +124,7 @@ class DatoRoutes {
         let dSchema = {
             "_id": id,
             "_nombre": nombre,
-            "_fechNac": fechNac,
+            "_edad": edad,
             "_nivel": nivel,
             "_nacionalidad": nacionalidad,
             "_nomCaballo": nomCaballo,
@@ -163,7 +162,7 @@ class DatoRoutes {
 
     private modiNivel = async (req: Request, res: Response) => {
         const { id } = req.params 
-        const { aficionado, edadMax, limiteEdad, inscripcion } = req.body
+        const { aficionado, limiteEdad, inscripcion } = req.body
         await db.conectarBD()
         await Niveles.findOneAndUpdate(
            {
@@ -171,7 +170,6 @@ class DatoRoutes {
            },
            {
                "_aficionado": aficionado,
-               "_edadMax": edadMax,
                "_limiteEdad": limiteEdad,
                "_inscripcion": inscripcion
            },
