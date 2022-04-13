@@ -116,7 +116,7 @@ class DatoRoutes {
     }
 
     private newParticipante = async (req: Request, res: Response) => {
-        const {id, nombre, edad, nivel, nacionalidad, nomCaballo, raza, edadCaballo,
+        const {id, nombre, edad, nivel, modalidad, nacionalidad, nomCaballo, raza, edadCaballo,
         cabEstabulado, totalSaltos, maxAltura, TLimiteS, derriboS, rehusoS, caidaS,
         tiempoS, TLimiteC, rehusoC, caidaC, tiempoC, parada, paso, trote, galope, 
         pasoAtras, transiciones, cambioDirec, figuras, movLateral, piruetas} = req.body
@@ -126,6 +126,7 @@ class DatoRoutes {
             "_nombre": nombre,
             "_edad": edad,
             "_nivel": nivel,
+            "_modalidad": modalidad,
             "_nacionalidad": nacionalidad,
             "_nomCaballo": nomCaballo,
             "_raza": raza,
@@ -185,7 +186,7 @@ class DatoRoutes {
 
     private modiPartici = async (req: Request, res: Response) => {
         const { nombre } = req.params
-        const {nivel, nomCaballo, raza, edadCaballo, cabEstabulado, totalSaltos, maxAltura, 
+        const {nivel, modalidad, nomCaballo, raza, edadCaballo, cabEstabulado, totalSaltos, maxAltura, 
             TLimiteS, derriboS, rehusoS, caidaS, tiempoS, TLimiteC, rehusoC, caidaC, 
             tiempoC, parada, paso, trote, galope, pasoAtras, transiciones, cambioDirec, 
             figuras, movLateral, piruetas} = req.body
@@ -196,6 +197,7 @@ class DatoRoutes {
             },
             {
                 "_nivel": nivel,
+                "_modalidad": modalidad,
                 "_nomCaballo": nomCaballo,
                 "_raza": raza,
                 "_edadCaballo": edadCaballo,

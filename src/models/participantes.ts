@@ -15,6 +15,9 @@ const participanteSchema = new Schema (
         _nivel: {
             type: String
         },
+        _modalidad: {
+            type: String
+        },
         _nacionalidad: {
             type: String
         },
@@ -116,6 +119,7 @@ export type participante = {
     _edad: Number | null,
     _nacionalidad: String | null,
     _nivel: String | null,
+    _modalidad: String | null,
     _nomCaballo: String | null,
     _raza: String | null,
     _edadCaballo: String | null,
@@ -128,6 +132,7 @@ export type pSalto = {
     _edad: Number | null,
     _nacionalidad: String | null,
     _nivel: String | null,
+    _modalidad: String | null,
     _nomCaballo: String | null,
     _raza: String | null,
     _edadCaballo: String | null,
@@ -149,6 +154,7 @@ export type pCross = {
     _edad: Number | null,
     _nacionalidad: String | null,
     _nivel: String | null,
+    _modalidad: String | null,
     _nomCaballo: String | null,
     _raza: String | null,
     _edadCaballo: String | null,
@@ -167,6 +173,7 @@ export type pDoma = {
     _edad: Number | null,
     _nacionalidad: String | null,
     _nivel: String | null,
+    _modalidad: String | null,
     _nomCaballo: String | null,
     _raza: String | null,
     _edadCaballo: String | null,
