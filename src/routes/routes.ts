@@ -56,7 +56,12 @@ class DatoRoutes {
         const { nivel } = req.params
         await db.conectarBD()
         .then (async () => {
-            const query = await Niveles.aggregate(
+            const query = await Niveles.findOne(
+                {
+                    '_tipoNivel': nivel
+                }
+            )
+            /*const query = await Niveles.aggregate(
                 [
                     {
                         $lookup: {
@@ -72,7 +77,8 @@ class DatoRoutes {
                         }
                     }
                 ]
-            )
+                
+            )*/
             res.json(query)
         })
         .catch((mensaje) => {
