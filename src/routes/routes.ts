@@ -60,10 +60,10 @@ class DatoRoutes {
                 [
                     {
                         $lookup: {
-                            from: 'participantes',
+                            from: 'niveles',
                             localField: '_tipoNivel',
                             foreignField: '_nivel',
-                            as: 'participantes'
+                            as: 'niveles'
                         }
                     }, 
                     {
