@@ -56,19 +56,19 @@ class DatoRoutes {
         const { nivel } = req.params
         await db.conectarBD()
         .then (async () => {
-            const query = await Niveles.findOne(
+            /*const query = await Niveles.findOne(
                 {
                     '_tipoNivel': nivel
                 }
-            )
-            /*const query = await Niveles.aggregate(
+            )*/
+            const query = await Niveles.aggregate(
                 [
                     {
                         $lookup: {
-                            from: 'niveles',
+                            from: 'participantes',
                             localField: '_tipoNivel',
                             foreignField: '_nivel',
-                            as: 'niveles'
+                            as: 'participantes'
                         }
                     }, 
                     {
@@ -78,7 +78,7 @@ class DatoRoutes {
                     }
                 ]
                 
-            )*/
+            )
             res.json(query)
         })
         .catch((mensaje) => {
