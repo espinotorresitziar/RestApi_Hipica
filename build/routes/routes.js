@@ -69,7 +69,7 @@ class DatoRoutes {
                     },
                     {
                         $match: {
-                            _tipoNivel: tipoNivel
+                            "_tipoNivel": tipoNivel
                         }
                     }
                 ]);
