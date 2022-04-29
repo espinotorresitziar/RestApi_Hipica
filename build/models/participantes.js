@@ -16,6 +16,9 @@ const participanteSchema = new mongoose_1.Schema({
     _nivel: {
         type: String
     },
+    _modalidad: {
+        type: String
+    },
     _nacionalidad: {
         type: String
     },
