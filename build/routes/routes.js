@@ -81,6 +81,20 @@ class DatoRoutes {
             });
             yield database_1.db.desconectarBD();
         });
+        this.getNivelid = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const { idNivel } = req.params;
+            yield database_1.db.conectarBD()
+                .then(() => __awaiter(this, void 0, void 0, function* () {
+                const query = yield niveles_1.Niveles.find({
+                    '_idNivel': idNivel
+                });
+                res.json(query);
+            }))
+                .catch((mensaje) => {
+                res.send(mensaje);
+            });
+            yield database_1.db.desconectarBD();
+        });
         this.getParticipante = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const { nombre } = req.params;
             yield database_1.db.conectarBD()
@@ -96,10 +110,10 @@ class DatoRoutes {
             yield database_1.db.desconectarBD();
         });
         this.newNivel = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { id, tipoNivel, aficionado, limiteEdad, inscripcion } = req.body;
+            const { idNivel, tipoNivel, aficionado, limiteEdad, inscripcion } = req.body;
             yield database_1.db.conectarBD();
             let dSchema = {
-                "_id": id,
+                "_idNivel": idNivel,
                 "_tipoNivel": tipoNivel,
                 "_aficionado": aficionado,
                 "_limiteEdad": limiteEdad,
@@ -112,10 +126,10 @@ class DatoRoutes {
             yield database_1.db.desconectarBD();
         });
         this.newParticipante = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { id, nombre, edad, nivel, modalidad, nacionalidad, nomCaballo, raza, edadCaballo, cabEstabulado, totalSaltos, maxAltura, TLimiteS, derriboS, rehusoS, caidaS, tiempoS, TLimiteC, rehusoC, caidaC, tiempoC, parada, paso, trote, galope, pasoAtras, transiciones, cambioDirec, figuras, movLateral, piruetas } = req.body;
+            const { idPart, nombre, edad, nivel, modalidad, nacionalidad, nomCaballo, raza, edadCaballo, cabEstabulado, totalSaltos, maxAltura, TLimiteS, derriboS, rehusoS, caidaS, tiempoS, TLimiteC, rehusoC, caidaC, tiempoC, parada, paso, trote, galope, pasoAtras, transiciones, cambioDirec, figuras, movLateral, piruetas } = req.body;
             yield database_1.db.conectarBD();
             let dSchema = {
-                "_id": id,
+                "_idPart": idPart,
                 "_nombre": nombre,
                 "_edad": edad,
                 "_nivel": nivel,
@@ -154,11 +168,11 @@ class DatoRoutes {
             yield database_1.db.desconectarBD();
         });
         this.modiNivel = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
+            const { idNivel } = req.params;
             const { aficionado, limiteEdad, inscripcion } = req.body;
             yield database_1.db.conectarBD();
             yield niveles_1.Niveles.findOneAndUpdate({
-                "_id": id
+                "_idNivel": idNivel
             }, {
                 "_aficionado": aficionado,
                 "_limiteEdad": limiteEdad,
@@ -232,6 +246,7 @@ class DatoRoutes {
         this._router.get('/niveles', this.getNiveles);
         this._router.get('/participantes', this.getParticipantes);
         this._router.get('/niveles/:_tipoNivel', this.getNivel);
+        this._router.get('/niveles/:idNivel', this.getNivelid);
         this._router.get('/participante/:nombre', this.getParticipante);
         this._router.post('/nivel', this.newNivel);
         this._router.post('/participante', this.newParticipante);

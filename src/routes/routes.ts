@@ -87,6 +87,23 @@ class DatoRoutes {
         await db.desconectarBD()
     }
 
+    getNivelid = async (req: Request, res: Response) => {
+        const { idNivel } = req.params
+        await db.conectarBD()
+        .then(async () => {
+            const query = await Niveles.find (
+                {
+                    '_idNivel' : idNivel 
+                }
+            )
+            res.json(query)
+        })
+        .catch ((mensaje) => {
+            res.send(mensaje)
+        })
+        await db.desconectarBD()
+    }
+
     private getParticipante = async (req: Request, res: Response) => {
         const {nombre} = req.params
         await db.conectarBD()
@@ -105,10 +122,10 @@ class DatoRoutes {
     }
 
     private newNivel = async (req: Request, res: Response) => {
-        const {id, tipoNivel, aficionado, limiteEdad, inscripcion} = req.body
+        const {idNivel, tipoNivel, aficionado, limiteEdad, inscripcion} = req.body
         await db.conectarBD()
         let dSchema = {
-            "_id": id,
+            "_idNivel": idNivel,
             "_tipoNivel": tipoNivel,
             "_aficionado": aficionado,
             "_limiteEdad": limiteEdad,
@@ -122,13 +139,13 @@ class DatoRoutes {
     }
 
     private newParticipante = async (req: Request, res: Response) => {
-        const {id, nombre, edad, nivel, modalidad, nacionalidad, nomCaballo, raza, edadCaballo,
+        const {idPart, nombre, edad, nivel, modalidad, nacionalidad, nomCaballo, raza, edadCaballo,
         cabEstabulado, totalSaltos, maxAltura, TLimiteS, derriboS, rehusoS, caidaS,
         tiempoS, TLimiteC, rehusoC, caidaC, tiempoC, parada, paso, trote, galope, 
         pasoAtras, transiciones, cambioDirec, figuras, movLateral, piruetas} = req.body
         await db.conectarBD()
         let dSchema = {
-            "_id": id,
+            "_idPart": idPart,
             "_nombre": nombre,
             "_edad": edad,
             "_nivel": nivel,
@@ -168,12 +185,12 @@ class DatoRoutes {
     }
 
     private modiNivel = async (req: Request, res: Response) => {
-        const { id } = req.params 
+        const { idNivel } = req.params 
         const { aficionado, limiteEdad, inscripcion } = req.body
         await db.conectarBD()
         await Niveles.findOneAndUpdate(
            {
-                "_id": id
+                "_idNivel": idNivel
            },
            {
                "_aficionado": aficionado,
@@ -257,6 +274,7 @@ class DatoRoutes {
         this._router.get('/niveles', this.getNiveles)
         this._router.get('/participantes', this.getParticipantes)
         this._router.get('/niveles/:_tipoNivel', this.getNivel)
+        this._router.get('/niveles/:idNivel', this.getNivelid)
         this._router.get('/participante/:nombre', this.getParticipante)
         this._router.post('/nivel', this.newNivel)
         this._router.post('/participante', this.newParticipante)

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Participantes = void 0;
 const mongoose_1 = require("mongoose");
 const participanteSchema = new mongoose_1.Schema({
-    _id: {
+    _idPart: {
         type: Number,
         unique: true
     },
