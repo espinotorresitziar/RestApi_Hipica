@@ -273,7 +273,7 @@ class DatoRoutes {
     misRutas(){
         this._router.get('/niveles', this.getNiveles)
         this._router.get('/participantes', this.getParticipantes)
-        this._router.get('/niveles/:_tipoNivel', this.getNivel)
+        this._router.get('/niveles/:id', this.getNivelid)
         this._router.get('/nivel/:id', this.getNivelid)
         this._router.get('/participante/:nombre', this.getParticipante)
         this._router.post('/nivel', this.newNivel)
