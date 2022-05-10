@@ -82,11 +82,11 @@ class DatoRoutes {
             yield database_1.db.desconectarBD();
         });
         this.getNivelid = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { idNivel } = req.params;
+            const { id } = req.params;
             yield database_1.db.conectarBD()
                 .then(() => __awaiter(this, void 0, void 0, function* () {
                 const query = yield niveles_1.Niveles.find({
-                    '_idNivel': idNivel
+                    '_id': id
                 });
                 res.json(query);
             }))
@@ -246,7 +246,7 @@ class DatoRoutes {
         this._router.get('/niveles', this.getNiveles);
         this._router.get('/participantes', this.getParticipantes);
         this._router.get('/niveles/:_tipoNivel', this.getNivel);
-        this._router.get('/niveles/:idNivel', this.getNivelid);
+        this._router.get('/niveles/:id', this.getNivelid);
         this._router.get('/participante/:nombre', this.getParticipante);
         this._router.post('/nivel', this.newNivel);
         this._router.post('/participante', this.newParticipante);

@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 
 const nivelSchema = new Schema (
     {
-        _idNivel: {
+        _id: {
             type: Number,
             unique: true
         },
@@ -22,7 +22,7 @@ const nivelSchema = new Schema (
 )
 
 export type nivel = {
-    _idNivel: number | null,
+    _id: number | null,
     _tipoNivel: String | null,
     _aficionado: Boolean | null,
     _limiteEdad: Boolean | null,
