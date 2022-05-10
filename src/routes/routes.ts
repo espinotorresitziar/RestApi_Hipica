@@ -53,14 +53,32 @@ class DatoRoutes {
     }
 
     private getNivel = async (req: Request, res: Response) => {
-        const { idNivel } = req.params
+        const { tipoNivel } = req.params
         await db.conectarBD()
         .then (async () => {
             const query = await Niveles.findOne(
                 {
-                    '_idNivel': idNivel
+                    '_tipoNivel': tipoNivel
                 }
             )
+            /*const query = await Niveles.aggregate(
+                [
+                    {
+                        $lookup: {
+                            from: 'participantes',
+                            localField: '_tipoNivel',
+                            foreignField: '_nivel',
+                            as: 'participantes'
+                        }
+                    }, 
+                    {
+                        $match: {
+                            "_tipoNivel": tipoNivel
+                        }
+                    }
+                ]
+                
+            )*/
             res.json(query)
         })
         .catch((mensaje) => {
@@ -87,10 +105,10 @@ class DatoRoutes {
     }
 
     private newNivel = async (req: Request, res: Response) => {
-        const {idNivel, tipoNivel, aficionado, limiteEdad, inscripcion} = req.body
+        const {id, tipoNivel, aficionado, limiteEdad, inscripcion} = req.body
         await db.conectarBD()
         let dSchema = {
-            "_idNivel": idNivel,
+            "_id": id,
             "_tipoNivel": tipoNivel,
             "_aficionado": aficionado,
             "_limiteEdad": limiteEdad,
@@ -104,13 +122,13 @@ class DatoRoutes {
     }
 
     private newParticipante = async (req: Request, res: Response) => {
-        const {idPart, nombre, edad, nivel, modalidad, nacionalidad, nomCaballo, raza, edadCaballo,
+        const {id, nombre, edad, nivel, modalidad, nacionalidad, nomCaballo, raza, edadCaballo,
         cabEstabulado, totalSaltos, maxAltura, TLimiteS, derriboS, rehusoS, caidaS,
         tiempoS, TLimiteC, rehusoC, caidaC, tiempoC, parada, paso, trote, galope, 
         pasoAtras, transiciones, cambioDirec, figuras, movLateral, piruetas} = req.body
         await db.conectarBD()
         let dSchema = {
-            "_idPart": idPart,
+            "_id": id,
             "_nombre": nombre,
             "_edad": edad,
             "_nivel": nivel,
@@ -150,12 +168,12 @@ class DatoRoutes {
     }
 
     private modiNivel = async (req: Request, res: Response) => {
-        const { idNivel } = req.params 
+        const { id } = req.params 
         const { aficionado, limiteEdad, inscripcion } = req.body
         await db.conectarBD()
         await Niveles.findOneAndUpdate(
            {
-                "_idNivel": idNivel
+                "_id": id
            },
            {
                "_aficionado": aficionado,
@@ -238,11 +256,11 @@ class DatoRoutes {
     misRutas(){
         this._router.get('/niveles', this.getNiveles)
         this._router.get('/participantes', this.getParticipantes)
-        this._router.get('/niveles/:idNivel', this.getNivel)
+        this._router.get('/niveles/:tipoNivel', this.getNivel)
         this._router.get('/participante/:nombre', this.getParticipante)
         this._router.post('/nivel', this.newNivel)
         this._router.post('/participante', this.newParticipante)
-        this._router.put('/modificarNivel/:idNivel', this.modiNivel)
+        this._router.put('/modificarNivel/:id', this.modiNivel)
         this._router.put('/modificarPartici/:nombre', this.modiPartici)
         this._router.delete('/eliminarPartici/:nombre', this.elimParticipante)
     }
