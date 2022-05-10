@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Niveles = void 0;
 const mongoose_1 = require("mongoose");
 const nivelSchema = new mongoose_1.Schema({
-    _id: {
+    _idNivel: {
         type: Number,
         unique: true
     },
