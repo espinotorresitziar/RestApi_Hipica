@@ -53,12 +53,12 @@ class DatoRoutes {
     }
 
     private getNivel = async (req: Request, res: Response) => {
-        const { _tipoNivel } = req.params
+        const { id } = req.params
         await db.conectarBD()
         .then (async () => {
             const query = await Niveles.findOne(
                 {
-                    '_tipoNivel': _tipoNivel
+                    '_id': id
                 }
             )
             /*const query = await Niveles.aggregate(
@@ -273,8 +273,7 @@ class DatoRoutes {
     misRutas(){
         this._router.get('/niveles', this.getNiveles)
         this._router.get('/participantes', this.getParticipantes)
-        this._router.get('/niveles/:_tipoNivel', this.getNivel)
-        this._router.get('/niveles/:id', this.getNivelid)
+        this._router.get('/niveles/:id', this.getNivel)
         this._router.get('/participante/:nombre', this.getParticipante)
         this._router.post('/nivel', this.newNivel)
         this._router.post('/participante', this.newParticipante)
