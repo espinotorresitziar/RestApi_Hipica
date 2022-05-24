@@ -253,6 +253,19 @@ class DatoRoutes {
         await db.desconectarBD()
     }
 
+    private elimNivel = async (req: Request, res: Response) => {
+        const {tipoNivel} = req.params
+        await db.conectarBD()
+        await Niveles.findOneAndDelete(
+            {
+                "_tipoNivel": tipoNivel
+            }
+        )
+        .then((doc: any) => res.send('Nivel eliminado ' + doc))
+        .catch((err: any) => res.send('Error: ' + err))
+        await db.desconectarBD()
+    }
+
     misRutas(){
         this._router.get('/niveles', this.getNiveles)
         this._router.get('/participantes', this.getParticipantes)
@@ -263,6 +276,7 @@ class DatoRoutes {
         this._router.put('/modificarNivel/:id', this.modiNivel)
         this._router.put('/modificarPartici/:nombre', this.modiPartici)
         this._router.delete('/eliminarPartici/:nombre', this.elimParticipante)
+        this._router.delete('/eliminarNivel/:tipoNivel', this.elimNivel)
     }
 }
 

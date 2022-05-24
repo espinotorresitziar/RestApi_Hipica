@@ -223,6 +223,16 @@ class DatoRoutes {
                 .catch((err) => res.send('Error: ' + err));
             yield database_1.db.desconectarBD();
         });
+        this.elimNivel = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const { tipoNivel } = req.params;
+            yield database_1.db.conectarBD();
+            yield niveles_1.Niveles.findOneAndDelete({
+                "_tipoNivel": tipoNivel
+            })
+                .then((doc) => res.send('Nivel eliminado ' + doc))
+                .catch((err) => res.send('Error: ' + err));
+            yield database_1.db.desconectarBD();
+        });
         this._router = (0, express_1.Router)();
     }
     get router() {
@@ -238,6 +248,7 @@ class DatoRoutes {
         this._router.put('/modificarNivel/:id', this.modiNivel);
         this._router.put('/modificarPartici/:nombre', this.modiPartici);
         this._router.delete('/eliminarPartici/:nombre', this.elimParticipante);
+        this._router.delete('/eliminarNivel/:tipoNivel', this.elimNivel);
     }
 }
 const obj = new DatoRoutes();
