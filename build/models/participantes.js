@@ -43,7 +43,9 @@ const participanteSchema = new mongoose_1.Schema({
     _TLimiteS: {
         type: Number
     },
-    _derriboS: Number,
+    _derriboS: {
+        type: Number
+    },
     _rehusoS: {
         type: Number,
         max: 3
@@ -52,7 +54,9 @@ const participanteSchema = new mongoose_1.Schema({
         type: Number,
         max: 2
     },
-    _tiempoS: Number,
+    _tiempoS: {
+        type: Number
+    },
     _TLimiteC: {
         type: Number
     },
@@ -64,7 +68,9 @@ const participanteSchema = new mongoose_1.Schema({
         type: Number,
         max: 2
     },
-    _tiempoC: Number,
+    _tiempoC: {
+        type: Number
+    },
     _parada: {
         type: Number,
         max: 10
