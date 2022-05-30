@@ -128,24 +128,30 @@ class DatoRoutes {
                 "_totalSaltos": totalSaltos,
                 "_maxAltura": maxAltura,
                 "_TLimiteS": TLimiteS,
-                "_derriboS": derriboS,
-                "_rehusoS": rehusoS,
-                "_caidaS": caidaS,
-                "_tiempoS": tiempoS,
+                "_sPenalizaciones": {
+                    "_derriboS": derriboS,
+                    "_rehusoS": rehusoS,
+                    "_caidaS": caidaS,
+                    "_tiempoS": tiempoS
+                },
                 "_TLimiteC": TLimiteC,
-                "_rehusoC": rehusoC,
-                "_caidaC": caidaC,
-                "_tiempoC": tiempoC,
-                "_parada": parada,
-                "_paso": paso,
-                "_trote": trote,
-                "_galope": galope,
-                "_pasoAtras": pasoAtras,
-                "_transiciones": transiciones,
-                "_cambioDirec": cambioDirec,
-                "_figuras": figuras,
-                "_movLateral": movLateral,
-                "_piruetas": piruetas
+                "_cPenalizaciones": {
+                    "_rehusoC": rehusoC,
+                    "_caidaC": caidaC,
+                    "_tiempoC": tiempoC
+                },
+                "_dPuntuaciones": {
+                    "_parada": parada,
+                    "_paso": paso,
+                    "_trote": trote,
+                    "_galope": galope,
+                    "_pasoAtras": pasoAtras,
+                    "_transiciones": transiciones,
+                    "_cambioDirec": cambioDirec,
+                    "_figuras": figuras,
+                    "_movLateral": movLateral,
+                    "_piruetas": piruetas
+                }
             };
             const oSchema = new participantes_1.Participantes(dSchema);
             yield oSchema.save()
