@@ -42,9 +42,7 @@ const participanteSchema = new Schema (
         _TLimiteS: {
             type: Number
         },
-        _derriboS: {
-            type: Number
-        },
+        _derriboS: Number,
         _rehusoS: {
             type: Number,
             max: 3
@@ -53,9 +51,7 @@ const participanteSchema = new Schema (
             type: Number,
             max: 2
         },
-        _tiempoS: {
-            type: Number
-        },
+        _tiempoS: Number,
         _TLimiteC: {
             type: Number
         },
@@ -67,9 +63,7 @@ const participanteSchema = new Schema (
             type: Number,
             max: 2
         },
-        _tiempoC: {
-            type: Number
-        },
+        _tiempoC: Number,
         _parada: {
             type: Number,
             max: 10
@@ -161,6 +155,7 @@ export type pCross = {
     _rehusoC: Number | null,
     _caidaC: Number | null,
     _tiempoC: Number | null
+    
 }
 
 export type pDoma = {
